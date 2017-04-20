@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :vote]
 
   # GET /projects
   # GET /projects.json
@@ -61,10 +61,28 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def vote
+    case params[:direction]
+      when 'up'
+        current_user.voted_for?(@project) ?
+            current_user.unvote_for(@project) :
+            current_user.vote(@project, { :exclusive => true, :direction => :up })
+      when 'down'
+        current_user.voted_against?(@project) ?
+            current_user.unvote_for(@project) :
+            current_user.vote(@project, { :exclusive => true, :direction => :down })
+      else
+        current_user.unvote_for(@project)
+    end
+    redirect_to request.referrer
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = params[:id].present? ?
+          Project.find(params[:id]) :
+          Project.find(params[:project_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
