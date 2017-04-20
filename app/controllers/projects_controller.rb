@@ -5,26 +5,31 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = Project.all
+    #authorize! :show, @projects
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+    authorize! :show, @project
   end
 
   # GET /projects/new
   def new
     @project = Project.new
+    authorize! :create, @project
   end
 
   # GET /projects/1/edit
   def edit
+    authorize! :edit, @project
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(project_params)
+    authorize! :create, @project
 
     respond_to do |format|
       if @project.save
@@ -40,6 +45,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    authorize! :edit, @project
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -54,6 +60,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+    authorize! :delete, @project
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
@@ -62,6 +69,7 @@ class ProjectsController < ApplicationController
   end
 
   def vote
+    authorize! :vote, @project
     case params[:direction]
       when 'up'
         current_user.voted_for?(@project) ?
@@ -78,6 +86,7 @@ class ProjectsController < ApplicationController
   end
 
   def membership
+    authorize! :join, @project
     case params[:membership_action]
       when 'join'
         current_user.projects << @project

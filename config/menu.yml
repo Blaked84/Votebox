@@ -1,21 +1,10 @@
 -
-  name: title_du_menu1
-  title: Titre du menu1
-  ability_action: read
-  ability_object: admin
-  url: '#'
-  path: 'admin_configurable_path'
-  login_required: true
-  dropdown: false
-
-
--
-   name: title_du_menu2
-   title: Title du menu 2
+   name: projets
+   title: Projets
    ability_action: read
-   ability_object: user
-   url: 'http://google.fr'
-   login_required: false
+   ability_object: admin
+   path: 'projects_path'
+   login_required: true
    dropdown: false
 
 -  # Drop down admin menu
