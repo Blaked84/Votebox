@@ -1,0 +1,34 @@
+.card
+  .card-content
+    %span.card-title=p.name
+    %p.grey-text.project-subtitle
+      %i.material-icons person
+      %span=p.author
+      %i.material-icons label
+      %span
+        =p.category.present? ? p.category.name.capitalize : "Non classé"
+
+    %p=p.description
+  .card-action
+    =link_to project_vote_path(p, direction: "up"),
+               method: :post,
+               class: "waves-effect waves-teal btn btn-flat  #{  current_user.present? && current_user.voted_for?(p) ? 'green-text textdarken-3' : 'grey-text'}" do
+      %span
+        %i.material-icons thumb_up
+        %span.vote-in-buttons=p.votes_for
+    =link_to project_vote_path(p, direction: "down"),
+               method: :post,
+               class: "waves-effect waves-teal btn btn-flat #{ current_user.present? && current_user.voted_against?(p) ? 'red-text textdarken-3' : 'grey-text'}" do
+      %span
+        %i.material-icons thumb_down
+        %span.vote-in-buttons=p.votes_against
+    -if current_user.present? &&  current_user.projects.include?(p)
+      =link_to project_membership_path(p, membership_action: "leave"),
+                 method: :post,
+                 class: "waves-effect waves-teal btn btn-flat" do
+        Annuler ma participation
+    -else
+      =link_to project_membership_path(p, membership_action: "join"),
+            method: :post,
+            class: "waves-effect waves-teal btn btn-flat" do
+        Participer
