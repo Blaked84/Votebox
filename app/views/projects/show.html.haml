@@ -4,6 +4,9 @@
   %b Name:
   = @project.name
 %p
+  %b Categorie:
+  = @project.category.name if @project.category.present?
+%p
   %b Description:
   = @project.description
 

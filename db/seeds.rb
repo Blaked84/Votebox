@@ -5,4 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-Role.create [{name: :admin},{name: :support}]
+Role.create [
+                {name: :admin},
+                {name: :support}]
+Category.create [
+    {name: "gadz.org", description: "L'IT de la communauté"},
+    {name: "divers"}]

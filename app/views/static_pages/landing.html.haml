@@ -7,7 +7,8 @@
         %i.material-icons person
         %span=p.author
         %i.material-icons label
-        %span Test_cat
+        %span
+          =p.category.present? ? p.category.name.capitalize : "Non classé"
 
       %p=p.description
     .card-action
