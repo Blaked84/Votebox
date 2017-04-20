@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :vote]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :vote, :membership]
 
   # GET /projects
   # GET /projects.json
@@ -73,6 +73,16 @@ class ProjectsController < ApplicationController
             current_user.vote(@project, { :exclusive => true, :direction => :down })
       else
         current_user.unvote_for(@project)
+    end
+    redirect_to request.referrer
+  end
+
+  def membership
+    case params[:membership_action]
+      when 'join'
+        current_user.projects << @project
+      else
+        current_user.projects.delete(@project)
     end
     redirect_to request.referrer
   end

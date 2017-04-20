@@ -23,9 +23,17 @@
         %span
           %i.material-icons thumb_down
           %span.vote-in-buttons=p.votes_against
+      -if current_user.projects.exclude?(p)
+        =link_to project_membership_path(p, membership_action: "join"),
+                 method: :post,
+                 class: "waves-effect waves-teal btn btn-flat" do
+          Participer
+      -else
+        =link_to project_membership_path(p, membership_action: "leave"),
+                 method: :post,
+                 class: "waves-effect waves-teal btn btn-flat" do
+          Annuler ma participation
 
-      =link_to "#", class: "waves-effect waves-teal btn btn-flat" do
-        Participer
 
 .center
   =link_to projects_path, class: "waves-effect waves-teal btn btn-flat" do

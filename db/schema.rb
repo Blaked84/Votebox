@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170420130657) do
+ActiveRecord::Schema.define(version: 20170420150106) do
 
   create_table "configurables", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20170420130657) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  create_table "projects_members", force: :cascade do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "projects_members", ["project_id"], name: "index_projects_members_on_project_id"
+  add_index "projects_members", ["user_id"], name: "index_projects_members_on_user_id"
 
   create_table "roles", force: :cascade do |t|
     t.datetime "created_at", null: false
