@@ -1,3 +1,15 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.hero{
+  height: 500px;
+  background: #3d4a73;
+  color: white;
+}
+.btn-landing-primary{
+  color: #3d4a73;
+}
+.btn-landing-secondary {
+  border: 1px solid white;
+}
