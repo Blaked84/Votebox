@@ -265,6 +265,7 @@ DEPENDENCIES
   byebug
   configurable_engine!
   gorg_engine
+  i18n
   jbuilder (~> 2.0)
   omniauth-cas!
   rails (= 4.2.8)

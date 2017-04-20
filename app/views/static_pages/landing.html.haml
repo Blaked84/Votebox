@@ -1,0 +1,28 @@
+%h4.center Soutiens les projets qui te tiennent à coeur
+-@featured_projects.each do |p|
+  .card
+    .card-content
+      %span.card-title=p.name
+      %p.grey-text.project-subtitle
+        %i.material-icons person
+        %span=p.author
+        %i.material-icons label
+        %span Test_cat
+
+      %p=p.description
+    .card-action
+      =link_to "#", class: "waves-effect waves-teal btn btn-flat  green-text textdarken-3" do
+        %span
+          %i.material-icons thumb_up
+          %span.vote-in-buttons 10
+      =link_to "#", class: "waves-effect waves-teal btn btn-flat red-text textdarken-3" do
+        %span
+          %i.material-icons thumb_down
+          %span.vote-in-buttons 2
+
+      =link_to "#", class: "waves-effect waves-teal btn btn-flat" do
+        Participer
+
+.center
+  =link_to projects_path, class: "waves-effect waves-teal btn btn-flat" do
+    Découvrir tous les projets

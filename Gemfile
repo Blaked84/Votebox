@@ -29,6 +29,8 @@ gem 'configurable_engine', github: 'Blaked84/configurable_engine'
 gem "omniauth-cas", :git => "https://github.com/loocla/omniauth-cas.git", :branch => 'saml'
 gem "awesome_print", require:"ap"
 
+gem "i18n"
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
