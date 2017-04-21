@@ -108,7 +108,7 @@ GEM
       json
       multi_json
       request_store (>= 1.0)
-    gorg_engine (1.1.0)
+    gorg_engine (1.2.0)
       cancancan
       devise (~> 4.1.1)
       devise_masquerade
@@ -282,7 +282,7 @@ DEPENDENCIES
   awesome_print
   byebug
   configurable_engine!
-  gorg_engine
+  gorg_engine (>= 1.2.0)
   heroku_secrets!
   i18n
   jbuilder (~> 2.0)

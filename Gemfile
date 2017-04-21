@@ -24,7 +24,7 @@ gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'gorg_engine'
+gem 'gorg_engine', '>= 1.2.0'
 gem 'simple_form-materialize', github: 'patricklindsay/simple_form-materialize'
 gem 'configurable_engine', github: 'Blaked84/configurable_engine'
 gem "omniauth-cas", :git => "https://github.com/loocla/omniauth-cas.git", :branch => 'saml'
