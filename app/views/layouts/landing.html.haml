@@ -6,7 +6,6 @@
     = stylesheet_link_tag    "gorg_engine/gorg", media: "all"
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "gorg_engine/application"
-    = javascript_include_tag "application"
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
 
 
@@ -37,4 +36,5 @@
 
   = render :file => 'layouts/gorg_engine/_ga.html.erb'
 
-
+  -#todo move js tag on gorgengine gem
+  = javascript_include_tag "application"

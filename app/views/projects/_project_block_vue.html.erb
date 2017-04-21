@@ -1,0 +1,61 @@
+<div id="projects">
+  <div v-for="project in projects">
+    <div class="card">
+      <div class="card-content">
+        <span class="card-title">
+          {{ project.name }}
+        </span>
+        <p class="grey-text project-subtitle">
+          <i class="material-icons">person</i>
+          <span>
+            {{ project.author }}
+          </span>
+          <i class="material-icons">label</i>
+          <span v-if="project.category">
+            {{ project.category.name }}
+          </span>
+        </p>
+        <p>
+          {{ project.description }}
+        </p>
+      </div>
+      <div class="card-action">
+        <button v-on:click = "vote(project,true)"
+                class="waves-effect waves-teal btn btn-flat"
+                v-bind:class="{ 'green-text textdarken-3': project.current_user.voted_for,
+                                'grey-text': !project.current_user.voted_for }">
+          <span>
+            <i class="material-icons">thumb_up</i>
+            <span class="vote-in-buttons">
+              {{ project.votes_for}}
+            </span>
+          </span>
+        </button>
+        <button v-on:click = "vote(project,false)"
+                class="waves-effect waves-teal btn btn-flat"
+                v-bind:class="{ 'red-text textdarken-3': project.current_user.voted_against,
+                                'grey-text': !project.current_user.voted_against}">
+          <span>
+            <i class="material-icons">thumb_down</i>
+            <span class="vote-in-buttons">
+              {{ project.votes_against}}
+            </span>
+          </span>
+        </button>
+        <button v-on:click = "project.current_user.is_member ? join(project,false) : join(project,true)"
+                class="waves-effect waves-teal btn btn-flat">
+          <span>
+            <span v-if="project.current_user.is_member">
+              Je ne veux plus aider
+            </span>
+            <span v-else>
+              Je veux aider
+            </span>
+
+          </span>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
