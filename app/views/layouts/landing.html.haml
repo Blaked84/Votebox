@@ -6,6 +6,7 @@
     = stylesheet_link_tag    "gorg_engine/gorg", media: "all"
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "gorg_engine/application"
+    = javascript_include_tag "application"
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
 
 
@@ -20,7 +21,7 @@
           %h4 Soutiens les projets qui te tiennent à coeur
           =link_to "#projects", class: "waves-effect waves-teal btn white btn-landing-primary" do
             Découvrir
-          =link_to new_project_path, class: "waves-effect waves-teal btn btn-flat white-text btn-landing-secondary" do
+          =link_to new_project_path, class: "waves-effect waves-white btn btn-flat white-text btn-landing-secondary" do
             Proposer un projet
       .mw1140p.container
         %div
@@ -34,7 +35,4 @@
         = tags_for_gorg_slack_chat
         =gorg_slack_chat( name: current_user&&current_user.fullname, id: current_user&&current_user.hruid.to_s, link: current_user&&"https://moncompte.gadz.org/admin/info_user?uuid=#{current_user.uuid}")
 
-  = render :file => 'layouts/gorg_engine/_ga.html.erb'
-
-  -#todo move js tag on gorgengine gem
-  = javascript_include_tag "application"
+  = render :file => 'layouts/gorg_engine/_tracking.html.erb'
