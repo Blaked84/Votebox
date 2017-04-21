@@ -24,3 +24,5 @@ module Untitled
     config.active_record.raise_in_transactional_callbacks = true
   end
 end
+
+require File.expand_path('config/extra_config.rb',Rails.root)
