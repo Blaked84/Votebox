@@ -9,7 +9,7 @@
           <i class="material-icons">person</i>
 
           <span>
-            {{ project.author_name }}
+            Proposé par {{ project.author_name }}
           </span>
           <i class="material-icons">label</i>
           <span v-if="project.category">
@@ -19,10 +19,11 @@
           <span>
             {{ project.members_count }} personnes veulent aider
             <div v-for="member in project.members_infos">
-
-              <div class="chip" >
-                <img v-bind:src="member.avatar_url" alt="">
+              <div class="chip" v-for="member in project.members_infos" >
+                <img v-bind:src="member.avatar_url" alt="" v-if="member.avatar_url != ''">
+                <a v-bind:href="member.profile_url" target="_blank">
                   {{ member.name }}
+                </a>
               </div>
             </div>
           </span>
@@ -30,8 +31,7 @@
         <p>
           {{ project.description }}
         </p>
-      </div>
-      <div class="card-content">
+        <br />
         <p class="grey-text project-subtitle">
           <span v-if="project.voters_for.length > 0">
             <i class="material-icons">thumb_up</i>

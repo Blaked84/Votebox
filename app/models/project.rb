@@ -19,7 +19,10 @@ class Project < ActiveRecord::Base
     users.map{|m| m.fullname}
   end
   def members_infos
-    users.map{|m| [name: m.fullname, avatar_url:  m.avatar_url]}.flatten
+    users.map{|m| [name: m.fullname,
+                   avatar_url:  m.avatar_url,
+                   profile_url: "https://www.arts-et-metiers.asso.fr/index.php/annuaire2/profil/id/" + m.avatar_url.split("/").last.split("_").last.split(".").first
+    ]}.flatten
   end
 
   def members_count
