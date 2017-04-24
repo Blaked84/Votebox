@@ -7,6 +7,7 @@
         </span>
         <p class="grey-text project-subtitle">
           <i class="material-icons">person</i>
+
           <span>
             {{ project.author_name }}
           </span>
@@ -14,14 +15,42 @@
           <span v-if="project.category">
             {{ project.category.name }}
           </span>
+          <i class="material-icons">group</i>
+          <span>
+            {{ project.members_count }} personnes veulent aider
+            <div v-for="member in project.members_infos">
+
+              <div class="chip" >
+                <img v-bind:src="member.avatar_url" alt="">
+                  {{ member.name }}
+              </div>
+            </div>
+          </span>
         </p>
         <p>
           {{ project.description }}
         </p>
       </div>
+      <div class="card-content">
+        <p class="grey-text project-subtitle">
+          <span v-if="project.voters_for.length > 0">
+            <i class="material-icons">thumb_up</i>
+            <span v-for="voter in project.voters_for">
+              {{ voter }}
+            </span>
+          </span>
+          <span v-if="project.voters_against.length > 0">
+            <i class="material-icons">thumb_down</i>
+            <span v-for="voter in project.voters_against">
+              {{ voter }}
+            </span>
+          </span>
+
+        </p>
+      </div>
       <div class="card-action">
         <button v-on:click = "vote(project,true)"
-                class="waves-effect waves-teal btn btn-flat"
+                class="waves-effect btn btn-flat"
                 v-bind:class="{ 'green-text textdarken-3': project.current_user.voted_for,
                                 'grey-text': !project.current_user.voted_for }">
           <span>
@@ -32,7 +61,7 @@
           </span>
         </button>
         <button v-on:click = "vote(project,false)"
-                class="waves-effect waves-teal btn btn-flat"
+                class="waves-effect btn btn-flat"
                 v-bind:class="{ 'red-text textdarken-3': project.current_user.voted_against,
                                 'grey-text': !project.current_user.voted_against}">
           <span>
@@ -43,7 +72,7 @@
           </span>
         </button>
         <button v-on:click = "project.current_user.is_member ? join(project,false) : join(project,true)"
-                class="waves-effect waves-teal btn btn-flat">
+                class="waves-effect btn btn-flat">
           <span>
             <span v-if="project.current_user.is_member">
               Je ne veux plus aider
@@ -55,7 +84,14 @@
           </span>
         </button>
 
+        <button v-if="project.current_user.can_edit" v-on:click="edit(project)"
+                class="waves-effect btn btn-flat">
+          <span>
+            Modifier
+          </span>
+        </button>
       </div>
-    </div>
+
+      </div>
   </div>
 </div>

@@ -7,10 +7,6 @@ class Project < ActiveRecord::Base
 
   acts_as_voteable
 
-  def initialize
-    author ||= current_user
-  end
-
   def self.featured
     self.plusminus_tally.first(5)
   end
@@ -18,5 +14,23 @@ class Project < ActiveRecord::Base
   def author_name
     author.present? ? author.fullname : "pas d'auteur"
   end
+
+  def members_names
+    users.map{|m| m.fullname}
+  end
+  def members_infos
+    users.map{|m| [name: m.fullname, avatar_url:  m.avatar_url]}.flatten
+  end
+
+  def members_count
+    self.users.count
+  end
+
+  def voters(_for)
+    likers_id = Vote.where(voteable_type: "Project", voter_type: "User", voteable_id: self.id, vote: _for).pluck(:voter_id)
+    User.where(id: likers_id).map(&:fullname)
+  end
+
+
 
 end

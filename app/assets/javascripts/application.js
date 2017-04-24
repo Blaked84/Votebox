@@ -6,7 +6,7 @@ $( document ).ready(function() {
     var projects = new Vue({
         el: '#projects',
         data: {
-            projects: []
+            projects: [],
         },
         mounted: function() {
             var that;
@@ -54,6 +54,10 @@ $( document ).ready(function() {
                     });
                 else
                     location.href = "users/sign_in";
+            },
+            edit: function (project) {
+                location.href = project.urls.edit
+
             }
         }
 
