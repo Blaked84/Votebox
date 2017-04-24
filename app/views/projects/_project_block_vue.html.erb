@@ -18,7 +18,7 @@
           <i class="material-icons">group</i>
           <span>
             {{ project.members_count }} personnes veulent aider
-            <div v-for="member in project.members_infos">
+            <div>
               <div class="chip" v-for="member in project.members_infos" >
                 <img v-bind:src="member.avatar_url" alt="" v-if="member.avatar_url != ''">
                 <a v-bind:href="member.profile_url" target="_blank">
