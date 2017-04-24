@@ -51,6 +51,7 @@ class Ability
       can :show, Project
       can :join, Project
       can :create, Project
+      can :edit, Project, :author => user
     end
 
   end

@@ -15,5 +15,9 @@
   .field
     = f.label :category_id
     = f.select :category_id, Category.all.pluck(:name, :id)
+  -if can? :manage, Project
+    .field
+      = f.label :author
+      = f.select :user_id, User.all.pluck(:hruid, :id)
   .actions
     = f.submit 'Save'

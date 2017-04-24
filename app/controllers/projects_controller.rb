@@ -106,6 +106,8 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:name, :description, :category_id)
+      list_allowed_param = [:name, :description, :category_id]
+      list_allowed_param << :user_id if can? :manage, Project
+      params.require(:project).permit(list_allowed_param)
     end
 end
