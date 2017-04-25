@@ -22,11 +22,11 @@ $( document ).ready(function() {
             });
         },
         computed: {
-            ProjectsUrl () {
-                if (this.currentRoute == "/")
+            ProjectsUrl: function () {
+                if (this.currentRoute === "/")
                     return "/projects.json"
                 else
-                   return this.currentRoute + ".json";
+                    return this.currentRoute + ".json";
             }
         },
         methods: {
