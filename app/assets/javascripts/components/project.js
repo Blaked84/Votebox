@@ -1,4 +1,49 @@
 $( document ).ready(function() {
+    Vue.component('project-row', {
+       template: '#project-row',
+       props: {
+           project: Object
+       },
+       data: function () {
+            return {
+                vproject: this.project
+            }
+        },
+       methods: {
+           vote: function (_for) {
+               var that = this;
+               if (that.project.current_user.logged_user)
+                   $.ajax({
+                       method: 'POST',
+                       url: _for ? that.project.urls.vote_for : that.project.urls.vote_against,
+                       success: function(res) {
+                           that.vproject = res;
+                       }
+                   });
+               else
+                   location.href = "users/sign_in";
+           },
+           join: function (join) {
+               var that = this;
+               if (that.project.current_user.logged_user)
+                   $.ajax({
+                       method: 'POST',
+                       url: join ? that.project.urls.join : that.project.urls.leave,
+                       success: function(res) {
+                           that.vproject = res;
+                       }
+                   });
+               else
+                   location.href = "users/sign_in";
+           },
+           edit: function () {
+               var that = this;
+               location.href = that.vproject.urls.edit
+           }
+       }
+    });
+
+
     var projects = new Vue({
         el: '#projects',
         data: {
@@ -22,49 +67,6 @@ $( document ).ready(function() {
                 else
                     return this.currentRoute + ".json";
             }
-        },
-        methods: {
-            vote: function (project, _for) {
-                var that = this;
-                if (project.current_user.logged_user)
-                    $.ajax({
-                        method: 'POST',
-                        url: _for ? project.urls.vote_for : project.urls.vote_against,
-                        success: function(res) {
-                            $.ajax({
-                                url: '/projects.json',
-                                success: function(res) {
-                                    that.projects = res;
-                                }
-                            });
-                        }
-                    });
-                else
-                    location.href = "users/sign_in";
-            },
-            join: function (project, join) {
-                var that = this;
-                if (project.current_user.logged_user)
-                    $.ajax({
-                        method: 'POST',
-                        url: join ? project.urls.join : project.urls.leave,
-                        success: function(res) {
-                            $.ajax({
-                                url: '/projects.json',
-                                success: function(res) {
-                                    that.projects = res;
-                                }
-                            });
-                        }
-                    });
-                else
-                    location.href = "users/sign_in";
-            },
-            edit: function (project) {
-                location.href = project.urls.edit
-
-            }
         }
-
     });
 });

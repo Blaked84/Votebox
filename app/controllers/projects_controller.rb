@@ -83,7 +83,9 @@ class ProjectsController < ApplicationController
       else
         current_user.unvote_for(@project)
     end
-    redirect_to request.referrer
+    respond_to do |format|
+        format.json { render :show, status: :created, location: @project }
+    end
   end
 
   def membership
@@ -94,7 +96,9 @@ class ProjectsController < ApplicationController
       else
         current_user.projects.delete(@project)
     end
-    redirect_to request.referrer
+    respond_to do |format|
+      format.json { render :show, status: :created, location: @project }
+    end
   end
 
   private
