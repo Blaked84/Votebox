@@ -34,6 +34,4 @@ class Project < ActiveRecord::Base
     User.where(id: likers_id).map(&:fullname)
   end
 
-
-
 end

@@ -26,5 +26,6 @@ json.urls do
   json.join project_membership_path(project, membership_action: "join")
   json.leave project_membership_path(project, membership_action: "leave")
   json.edit edit_project_path(project)
+  json.show project_path(project)
 end
 json.url project_url(project, format: :json)

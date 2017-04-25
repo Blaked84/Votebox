@@ -2,9 +2,9 @@
   <div v-for="project in projects">
     <div class="card">
       <div class="card-content">
-        <span class="card-title">
+        <a class="card-title black-text" v-bind:href="project.urls.show">
           {{ project.name }}
-        </span>
+        </a>
         <p class="grey-text project-subtitle">
           <i class="material-icons">person</i>
 

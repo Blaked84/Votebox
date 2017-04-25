@@ -7,16 +7,27 @@ $( document ).ready(function() {
         el: '#projects',
         data: {
             projects: [],
+            currentRoute: window.location.pathname
         },
         mounted: function() {
             var that;
             that = this;
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            console.log(this.ProjectsUrl)
             $.ajax({
-                url: '/projects.json',
+                url: this.ProjectsUrl,
                 success: function(res) {
-                    that.projects = res;
+                    that.projects = res.constructor === Array ? res : [res];
                 }
             });
+        },
+        computed: {
+            ProjectsUrl () {
+                if (this.currentRoute == "/")
+                    return "/projects.json"
+                else
+                   return this.currentRoute + ".json";
+            }
         },
         methods: {
             vote: function (project, _for) {
