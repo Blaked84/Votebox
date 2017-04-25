@@ -2,12 +2,13 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
-  protect_from_forgery with: :null_session
-  skip_before_action :verify_authenticity_token
+  require GorgEngine::Engine.config.root + 'app' + 'controllers' + self.name.underscore
 
+  protect_from_forgery with: :null_session
+  skip_before_filter :verify_authenticity_token
+  #TODO add X-CSRF token in vuejs post
   layout 'gorg_engine/application'
 
-  require GorgEngine::Engine.config.root + 'app' + 'controllers' + self.name.underscore
 
   def access_denied(_exception)
     respond_to do |format|
