@@ -1,7 +1,6 @@
 json.extract! project,
               :id,
               :name,
-              :description,
               :created_at,
               :updated_at,
               :author_name,
@@ -10,6 +9,7 @@ json.extract! project,
               :votes_against,
               :members_count,
               :members_infos
+json.description sanitize( project.description)
 json.voters_for project.voters(true)
 json.voters_against project.voters(false)
 json.current_user do

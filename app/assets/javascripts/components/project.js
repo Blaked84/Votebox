@@ -1,4 +1,5 @@
 $( document ).ready(function() {
+
     Vue.component('project-row', {
        template: '#project-row',
        props: {
@@ -6,7 +7,9 @@ $( document ).ready(function() {
        },
        data: function () {
             return {
-                vproject: this.project
+                vproject: this.project,
+                editMode: false,
+                categorie: ["plop"]
             }
         },
        methods: {
@@ -39,6 +42,16 @@ $( document ).ready(function() {
            edit: function () {
                var that = this;
                location.href = that.vproject.urls.edit
+           },
+           update_project: function () {
+               var that = this;
+               Vue.http.patch(that.vproject.url,{name: that.vproject.name, description: that.vproject.description}).then( response =>
+                   {that.vproject = response.body;
+                   that.editMode = false},
+                   console.log("error")
+               )
+
+               // that.editMode = false
            }
        }
     });
