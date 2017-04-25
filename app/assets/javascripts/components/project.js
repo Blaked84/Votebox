@@ -45,8 +45,8 @@ $( document ).ready(function() {
            },
            update_project: function () {
                var that = this;
-               Vue.http.patch(that.vproject.url,{name: that.vproject.name, description: that.vproject.description}).then( response =>
-                   {that.vproject = response.body;
+               Vue.http.patch(that.vproject.url,{name: that.vproject.name, description: that.vproject.description}).then( function (response) {
+                   that.vproject = response.body;
                    that.editMode = false},
                    console.log("error")
                )
