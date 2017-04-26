@@ -13,9 +13,9 @@ GIT
 
 GIT
   remote: git://github.com/gadzorg/GorgEngine.git
-  revision: dd0ddb313aec5665066b711126eeae4141384dc5
+  revision: 353bc2c4e29bc641feab83c3bf54c37c1cc1dd87
   specs:
-    gorg_engine (1.2.1)
+    gorg_engine (1.2.2)
       cancancan
       devise (~> 4.1.1)
       devise_masquerade
@@ -287,7 +287,7 @@ DEPENDENCIES
   awesome_print
   byebug
   configurable_engine!
-  gorg_engine (>= 1.2.1)!
+  gorg_engine (>= 1.2.2)!
   heroku_secrets!
   i18n
   jbuilder (~> 2.0)
