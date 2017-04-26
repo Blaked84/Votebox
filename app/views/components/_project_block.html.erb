@@ -1,7 +1,22 @@
 <div id="projects">
+  <!--<div>-->
+    <!--Catégories :-->
+    <!--<button v-on:click="filter(categorie.id)"-->
+       <!--v-for="categorie in categories"-->
+       <!--class="waves-effect btn btn-flat"-->
+       <!--v-bind:class="{ 'blue-text textdarken-3': categoriesFilter == categorie.id}">-->
+      <!--{{ categorie.name }}-->
+    <!--</button>-->
+    <!--<button v-on:click="filter(null)"-->
+            <!--class="waves-effect btn btn-flat "-->
+            <!--v-if="categoriesFilter != null">-->
+      <!--Toutes-->
+    <!--</button>-->
+  <!--</div>-->
   <div v-for="project in projects"
        is="project-row"
-       :project="project">
+       :project="project"
+       :categories="categories">
   </div>
 </div>
 
@@ -19,7 +34,7 @@
            v-else>
           {{ vproject.name }}
         </a>
-        <p class="grey-text project-subtitle">
+        <p class="grey-text project-subtitle" v-if="!editMode">
           <i class="material-icons">person</i>
 
           <span>
@@ -43,8 +58,14 @@
           </span>
         </p>
         <div v-if="editMode">
+          <label>Categorie</label>
+          <select class="browser-default" v-model="vproject.category.id">
+            <option value="" disabled>Choose your option</option>
+            <option v-for="category in categories" v-bind:value="category.id" >{{ category.name }}</option>
+          </select>
+        </div>
+        <div v-if="editMode">
           <div class="input-field">
-
             <textarea v-model="vproject.description" class="materialize-textarea" id="project_description"></textarea>
           </div>
         </div>

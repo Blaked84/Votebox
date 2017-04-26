@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    filter = params.permit(:id)
+    filter = params.permit(:id, :category_id)
     @projects = Project.all.where(filter)
     #authorize! :show, @projects
   end

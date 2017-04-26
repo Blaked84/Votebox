@@ -3,13 +3,13 @@ $( document ).ready(function() {
     Vue.component('project-row', {
        template: '#project-row',
        props: {
-           project: Object
+           project: Object,
+           categories: Array
        },
        data: function () {
             return {
                 vproject: this.project,
-                editMode: false,
-                categorie: ["plop"]
+                editMode: false
             }
         },
        methods: {
@@ -45,13 +45,11 @@ $( document ).ready(function() {
            },
            update_project: function () {
                var that = this;
-               Vue.http.patch(that.vproject.url,{name: that.vproject.name, description: that.vproject.description}).then( function (response) {
+               Vue.http.patch(that.vproject.url,{name: that.vproject.name, description: that.vproject.description, category_id: that.vproject.category.id}).then( function (response) {
                    that.vproject = response.body;
                    that.editMode = false},
                    console.log("error")
                )
-
-               // that.editMode = false
            }
        }
     });
@@ -59,9 +57,14 @@ $( document ).ready(function() {
 
     var projects = new Vue({
         el: '#projects',
-        data: {
-            projects: [],
-            currentRoute: window.location.pathname
+        data: function (){
+            return {
+                projects: [],
+                currentRoute: window.location.pathname,
+                categories: [],
+                categoriesFilter: null
+            }
+
         },
         mounted: function() {
             var that;
@@ -72,13 +75,35 @@ $( document ).ready(function() {
                     that.projects = res.constructor === Array ? res : [res];
                 }
             });
+            $.ajax({
+                url: "/categories.json",
+                success: function(res) {
+                    that.categories = res.constructor === Array ? res : [res];
+                }
+            });
         },
         computed: {
-            ProjectsUrl: function () {
+            ProjectsUrl: function (f = null) {
+                var that = this;
+                var filter = that.categoriesFilter === null ? "" : "?category_id=" + that.categoriesFilter;
                 if (this.currentRoute === "/")
-                    return "/projects.json"
+                    return "/projects.json" + filter
                 else
                     return this.currentRoute + ".json";
+            }
+        },
+        methods: {
+            filter: function (id) {
+                var that;
+                that = this;
+                that.categoriesFilter = id;
+                that.projects = []
+                this.$http.get(this.ProjectsUrl).then(
+                    function(response){
+                        that.projects = response.body
+
+
+                });
             }
         }
     });
