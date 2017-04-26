@@ -83,7 +83,7 @@ $( document ).ready(function() {
             });
         },
         computed: {
-            ProjectsUrl: function (f = null) {
+            ProjectsUrl: function () {
                 var that = this;
                 var filter = that.categoriesFilter === null ? "" : "?category_id=" + that.categoriesFilter;
                 if (this.currentRoute === "/")
