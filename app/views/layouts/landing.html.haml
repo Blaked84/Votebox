@@ -18,11 +18,15 @@
     .wrapper
       .hero.valign-wrapper
         .container.center
-          %h4 Soutiens les projets qui te tiennent à coeur
+          %h4
+            Soutiens les
+            %b
+              %span#yourelement
+            qui te tiennent à coeur
           =link_to "#projects", class: "waves-effect waves-teal btn white btn-landing-primary" do
             Découvrir
           =link_to new_project_path, class: "waves-effect waves-white btn btn-flat white-text btn-landing-secondary" do
-            Proposer un projet
+            Proposer une idée
       .mw1140p.container
         %div
           .pam.fr
