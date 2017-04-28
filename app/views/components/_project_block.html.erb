@@ -16,8 +16,9 @@
   <div v-for="project in projects"
        is="project-row"
        :project="project"
-       :categories="categories">
-  </div>
+       :categories="categories"
+       :key="project.id"
+  />
 </div>
 
 
@@ -74,17 +75,13 @@
         </p>
         <br />
         <p class="grey-text project-subtitle">
-          <span v-if="vproject.voters_for.length > 0">
+          <span v-if="vproject.votes_for">
             <i class="material-icons">thumb_up</i>
-            <span v-for="voter in vproject.voters_for">
-              {{ voter }}
-            </span>
+            {{ vproject.voters_for.join(', ') }}
           </span>
-          <span v-if="vproject.voters_against.length > 0">
+          <span v-if="vproject.votes_against">
             <i class="material-icons">thumb_down</i>
-            <span v-for="voter in vproject.voters_against">
-              {{ voter }}
-            </span>
+            {{ vproject.voters_against.join(', ') }}
           </span>
 
         </p>
