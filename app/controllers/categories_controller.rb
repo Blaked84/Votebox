@@ -5,26 +5,31 @@ class CategoriesController < ApplicationController
   # GET /categories.json
   def index
     @categories = Category.all
+    authorize! :show, @categories
   end
 
   # GET /categories/1
   # GET /categories/1.json
   def show
+    authorize! :show, @categorie
   end
 
   # GET /categories/new
   def new
     @category = Category.new
+    authorize! :create, @categorie
   end
 
   # GET /categories/1/edit
   def edit
+    authorize! :edit, @categorie
   end
 
   # POST /categories
   # POST /categories.json
   def create
     @category = Category.new(category_params)
+    authorize! :create, @categorie
 
     respond_to do |format|
       if @category.save
@@ -40,6 +45,7 @@ class CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   # PATCH/PUT /categories/1.json
   def update
+    authorize! :edit, @categorie
     respond_to do |format|
       if @category.update(category_params)
         format.html { redirect_to @category, notice: 'Category was successfully updated.' }
@@ -54,6 +60,7 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
+    authorize! :delete, @categorie
     @category.destroy
     respond_to do |format|
       format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }

@@ -6,6 +6,14 @@
    path: 'projects_path'
    login_required: true
    dropdown: false
+-
+   name: categories
+   title: Categories
+   ability_action: read
+   ability_object: admin
+   path: 'categories_path'
+   login_required: true
+   dropdown: false
 
 -  # Drop down admin menu
    name: administration
