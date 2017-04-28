@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     filter = params.permit(:id, :category_id)
-    @projects = Project.all.where(filter)
+    @projects = Project.plusminus_tally.where(filter)
     #authorize! :show, @projects
   end
 
