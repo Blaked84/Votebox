@@ -9,7 +9,8 @@ $( document ).ready(function() {
        data: function () {
             return {
                 vproject: this.project,
-                editMode: false
+                editMode: false,
+                commentMode: false
             }
         },
        methods: {

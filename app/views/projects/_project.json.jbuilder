@@ -8,7 +8,8 @@ json.extract! project,
               :votes_for,
               :votes_against,
               :members_count,
-              :members_infos
+              :comments_count
+json.members_infos project.users.map(&:infos_to_display)
 json.description sanitize( project.description)
 json.voters_for project.voters(true)
 json.voters_against project.voters(false)

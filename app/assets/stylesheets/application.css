@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.show_on_parent_hover{
+    visibility: hidden;
+}
+
+.hoverable_parent:hover .show_on_parent_hover{
+    visibility: inherit;
+}

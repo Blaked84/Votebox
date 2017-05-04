@@ -1,51 +1,52 @@
 <div id="projects">
   <!--<div>-->
-    <!--Catégories :-->
-    <!--<button v-on:click="filter(categorie.id)"-->
-       <!--v-for="categorie in categories"-->
-       <!--class="waves-effect btn btn-flat"-->
-       <!--v-bind:class="{ 'blue-text textdarken-3': categoriesFilter == categorie.id}">-->
-      <!--{{ categorie.name }}-->
-    <!--</button>-->
-    <!--<button v-on:click="filter(null)"-->
-            <!--class="waves-effect btn btn-flat "-->
-            <!--v-if="categoriesFilter != null">-->
-      <!--Toutes-->
-    <!--</button>-->
+  <!--Catégories :-->
+  <!--<button v-on:click="filter(categorie.id)"-->
+  <!--v-for="categorie in categories"-->
+  <!--class="waves-effect btn btn-flat"-->
+  <!--v-bind:class="{ 'blue-text textdarken-3': categoriesFilter == categorie.id}">-->
+  <!--{{ categorie.name }}-->
+  <!--</button>-->
+  <!--<button v-on:click="filter(null)"-->
+  <!--class="waves-effect btn btn-flat "-->
+  <!--v-if="categoriesFilter != null">-->
+  <!--Toutes-->
+  <!--</button>-->
   <!--</div>-->
   <div v-for="project in projects"
        is="project-row"
        :project="project"
-       :categories="categories">
-  </div>
+       :categories="categories"
+       :key="project.id"
+  ></div>
 </div>
 
 
 <script type="text/x-template" id="project-row">
-    <div class="card">
-      <div class="card-content">
-        <div v-if="editMode">
-          <div class="input-field">
-            <input type="Text" v-model="vproject.name" id="name">
-          </div>
+  <div class="card">
+    <div class="card-content">
+      <div v-if="editMode">
+        <div class="input-field">
+          <input type="Text" v-model="vproject.name" id="name">
         </div>
-        <a class="card-title black-text"
-           v-bind:href="project.urls.show"
-           v-else>
-          {{ vproject.name }}
-        </a>
-        <p class="grey-text project-subtitle" v-if="!editMode">
-          <i class="material-icons">person</i>
+      </div>
+      <a class="card-title black-text"
+         v-bind:href="project.urls.show"
+         v-else>
+        {{ vproject.name }}
+      </a>
+      <p class="grey-text project-subtitle" v-if="!editMode">
+        <i class="material-icons">person</i>
 
-          <span>
+        <span>
             Proposé par {{ vproject.author_name }}
           </span>
-          <i class="material-icons">label</i>
-          <span v-if="vproject.category">
+        <i class="material-icons">label</i>
+        <span v-if="vproject.category">
             {{ vproject.category.name }}
           </span>
-          <i class="material-icons">group</i>
-          <span>
+        <i class="material-icons">group</i>
+        <span>
             {{ vproject.members_count }} personnes veulent aider
             <div>
               <div class="chip" v-for="member in vproject.members_infos" >
@@ -56,44 +57,47 @@
               </div>
             </div>
           </span>
-        </p>
-        <div v-if="editMode">
-          <label>Categorie</label>
-          <select class="browser-default" v-model="vproject.category.id">
-            <option value="" disabled>Choose your option</option>
-            <option v-for="category in categories" v-bind:value="category.id" >{{ category.name }}</option>
-          </select>
-        </div>
-        <div v-if="editMode">
-          <div class="input-field">
-            <textarea v-model="vproject.description" class="materialize-textarea" id="project_description"></textarea>
-          </div>
-        </div>
-        <p v-else v-html="vproject.description">
-          {{ vproject.description }}
-        </p>
-        <br />
-        <p class="grey-text project-subtitle">
-          <span v-if="vproject.voters_for.length > 0">
-            <i class="material-icons">thumb_up</i>
-            <span v-for="voter in vproject.voters_for">
-              {{ voter }}
-            </span>
-          </span>
-          <span v-if="vproject.voters_against.length > 0">
-            <i class="material-icons">thumb_down</i>
-            <span v-for="voter in vproject.voters_against">
-              {{ voter }}
-            </span>
-          </span>
-
-        </p>
+      </p>
+      <div v-if="editMode">
+        <label>Categorie</label>
+        <select class="browser-default" v-model="vproject.category.id">
+          <option value="" disabled>Choose your option</option>
+          <option v-for="category in categories" v-bind:value="category.id" >{{ category.name }}</option>
+        </select>
       </div>
-      <div class="card-action">
-        <button v-if="!editMode"
-                v-on:click = "vote(true)"
-                class="waves-effect btn btn-flat"
-                v-bind:class="{ 'green-text textdarken-3': vproject.current_user.voted_for,
+      <div v-if="editMode">
+        <div class="input-field">
+          <textarea v-model="vproject.description" class="materialize-textarea" id="project_description"></textarea>
+        </div>
+      </div>
+      <p v-else v-html="vproject.description">
+        {{ vproject.description }}
+      </p>
+      <br />
+      <p class="grey-text project-subtitle">
+          <span v-if="vproject.votes_for">
+            <i class="material-icons">thumb_up</i>
+            {{ vproject.voters_for.join(', ') }}
+          </span>
+        <span v-if="vproject.votes_against">
+            <i class="material-icons">thumb_down</i>
+            {{ vproject.voters_against.join(', ') }}
+          </span>
+        <a v-if="vproject.comments_count"
+           v-bind:href="project.urls.show"
+           class="grey-text">
+            <i class="material-icons">comment</i>
+            {{ vproject.comments_count }}
+            {{ vproject.comments_count > 1 ? "commentaires" : "commentaire"}}
+          </a>
+
+      </p>
+    </div>
+    <div class="card-action">
+      <button v-if="!editMode"
+              v-on:click = "vote(true)"
+              class="waves-effect btn btn-flat"
+              v-bind:class="{ 'green-text textdarken-3': vproject.current_user.voted_for,
                                 'grey-text': !vproject.current_user.voted_for }">
           <span>
             <i class="material-icons">thumb_up</i>
@@ -101,11 +105,11 @@
               {{ vproject.votes_for}}
             </span>
           </span>
-        </button>
-        <button v-if="!editMode"
-                v-on:click = "vote(false)"
-                class="waves-effect btn btn-flat"
-                v-bind:class="{ 'red-text textdarken-3': vproject.current_user.voted_against,
+      </button>
+      <button v-if="!editMode"
+              v-on:click = "vote(false)"
+              class="waves-effect btn btn-flat"
+              v-bind:class="{ 'red-text textdarken-3': vproject.current_user.voted_against,
                                 'grey-text': !vproject.current_user.voted_against}">
           <span>
             <i class="material-icons">thumb_down</i>
@@ -113,10 +117,22 @@
               {{ vproject.votes_against}}
             </span>
           </span>
-        </button>
-        <button v-if="!editMode"
-                v-on:click = "vproject.current_user.is_member ? join(false) : join(true)"
-                class="waves-effect btn btn-flat">
+      </button>
+      <a v-if="!editMode"
+              v-bind:href="project.urls.show"
+              class="waves-effect btn btn-flat"
+              v-bind:class="{ 'red-text textdarken-3': vproject.current_user.voted_against,
+                                'grey-text': !vproject.current_user.voted_against}">
+          <span>
+            <i class="material-icons">comment</i>
+            <span class="vote-in-buttons black-text">
+              Commenter
+            </span>
+          </span>
+      </a>
+      <button v-if="!editMode"
+              v-on:click = "vproject.current_user.is_member ? join(false) : join(true)"
+              class="waves-effect btn btn-flat">
           <span>
             <span v-if="vproject.current_user.is_member">
               Je ne veux plus aider
@@ -126,24 +142,36 @@
             </span>
 
           </span>
-        </button>
+      </button>
 
-        <button v-if="vproject.current_user.can_edit"
-                v-on:click="editMode ? editMode = false: editMode=true"
-                class="waves-effect btn btn-flat">
+      <button v-if="vproject.current_user.can_edit"
+              v-on:click="editMode ? editMode = false: editMode=true"
+              class="waves-effect btn btn-flat">
           <span>
             {{ editMode ? "Annuler" : "Modifier" }}
           </span>
-        </button>
-        <button v-if="editMode && vproject.current_user.can_edit" v-on:click="edit()"
-                class="waves-effect btn btn-flat">
+      </button>
+      <button v-if="editMode && vproject.current_user.can_edit" v-on:click="edit()"
+              class="waves-effect btn btn-flat">
           <span>
             Plus d'options
           </span>
-        </button>
-        <button v-if="editMode" v-on:click="update_project" class="waves-effect btn">Enregistrer</button>
-      </div>
+      </button>
+      <button v-if="editMode" v-on:click="update_project" class="waves-effect btn">Enregistrer</button>
+      <!--<div class="input-field row">-->
+        <!--<input type= "text" class="materialize-textarea col s11"-->
+               <!--v-on:click="commentMode=true"-->
+               <!--placeholder="Commenter">-->
+        <!--</input>-->
+        <!--<button  v-if="commentMode"-->
+                 <!--v-on:click="addComment"-->
+                 <!--class="waves-effect btn col">-->
+          <!--<i class="material-icons">send</i>-->
+        <!--</button>-->
+      <!--</div>-->
 
-      </div>
+    </div>
+
+  </div>
 
 </script>
