@@ -1,0 +1,70 @@
+<div id="comments">
+  <div class="card">
+    <ul class="collection">
+      <div v-for="comment in comments"
+           is="comment-row"
+           :comment="comment"
+           :key="comment.id"
+      ></div>
+      <li class="collection-item avatar">
+        <%= image_tag(@current_user.avatar_url, class: "circle")%>
+        <div class="row">
+
+          <div class="input-field col s11">
+          <textarea class="materialize-textarea"
+                    v-model="comment.text"
+                    v-on:click="commentMode=true"
+                    v-on:keyup.enter="addComment"
+                    placeholder="Commenter">
+          </textarea>
+          </div>
+          <button  v-if="commentMode"
+                   v-on:click="addComment"
+                   class="waves-effect btn col">
+            <i class="material-icons">send</i>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<script type="text/x-template" id="comment-row">
+    <li class="hoverable_parent collection-item avatar">
+      <img v-bind:src="vcomment.author.avatar_url"
+           alt=""
+           v-if="vcomment.author.avatar_url != ''"
+           class="circle"
+      >
+      <span class="title">
+        {{ vcomment.author.name }}
+      </span>
+      <span class="grey-text project-subtitle">
+        {{ dateshow }}
+      </span>
+      <a  v-on:click="editMode ? editMode = false: editMode=true"
+          class="waves-effect show_on_parent_hover"
+          v-if="!editMode && vcomment.current_user.can_edit">
+        Modifier
+      </a>
+      <div v-if="editMode">
+        <div class="input-field">
+          <input type="Text" v-model="vcomment.text" id="name">
+        </div>
+      </div>
+      <div v-else>
+        {{ vcomment.text }}
+      </div>
+      <a v-if="editMode"
+         v-on:click="editMode ? editMode = false: editMode=true"
+         class="waves-effect">
+        {{ editMode ? "Annuler" : "Modifier" }}
+      </a>
+      <a  v-if="editMode"
+          v-on:click="update_comment"
+          class="waves-effect btn">
+        Enregistrer</a>
+
+    </li>
+</script>

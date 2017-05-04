@@ -49,11 +49,10 @@ class Ability
       can :read, Role
       can :manage, Project
     elsif  user.persisted?
-      can :vote, Project
-      can :show, Project
-      can :join, Project
-      can :create, Project
+      can [:vote, :show, :join, :create], Project
       can :edit, Project, :author => user
+      can [:create, :show], Comment
+      can :edit, Comment, :author => user
     end
 
   end

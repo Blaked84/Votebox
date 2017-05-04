@@ -122,6 +122,11 @@ GEM
     devise_masquerade (0.4.0)
       devise (>= 2.1.0)
       railties (>= 3.0)
+    draper (2.1.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.7.0)
@@ -176,6 +181,8 @@ GEM
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.10.1)
+    momentjs-rails (2.17.1)
+      railties (>= 3.1)
     multi_json (1.12.1)
     mysql2 (0.4.5)
     nokogiri (1.7.1)
@@ -288,10 +295,12 @@ DEPENDENCIES
   awesome_print
   byebug
   configurable_engine!
+  draper
   gorg_engine (>= 1.2.2)!
   heroku_secrets!
   i18n
   jbuilder (~> 2.0)
+  momentjs-rails
   omniauth-cas!
   pg
   puma
