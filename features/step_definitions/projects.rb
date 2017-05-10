@@ -9,3 +9,43 @@ end
 Then(/^I should see a project described by (.*)/) do |description|
   expect(page).to have_content(description)
 end
+
+When(/^I click on vote (.*) first project$/) do |vote|
+  find("#vote-#{vote}-1").click
+end
+
+When(/^I click on join for first project$/) do
+  find("#join-1").click
+end
+
+Then(/^First project should have (.*) vote (.*)$/) do |vote_count, vote|
+  expect(
+      eval("Project.first.votes_#{vote}"))
+      .to eq(vote_count.to_i)
+end
+
+Then(/^First project should have (.*) members$/) do |members_count|
+  expect(Project.first.users.count).to eq(members_count.to_i)
+end
+
+Then(/^I (.*) voted (.*) the first project$/) do |verb, vote|
+  expect( eval("@me.voted_#{vote}?(Project.first)")).to be case verb
+    when "had"
+      true
+    when "had not"
+      false
+    else
+      raise "You should use 'had' or 'had not'"
+  end
+end
+
+Then(/^I (.*) member of the first project$/) do |verb|
+  expect( Project.first.users.include?(@me)).to be case verb
+    when "am"
+      true
+    when "am not"
+      false
+    else
+      raise "You should use 'had' or 'had not'"
+  end
+end

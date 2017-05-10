@@ -94,30 +94,32 @@
       </p>
     </div>
     <div class="card-action">
-      <button v-if="!editMode"
+      <a v-if="!editMode"
               v-on:click = "vote(true)"
               class="waves-effect btn btn-flat"
               v-bind:class="{ 'green-text textdarken-3': vproject.current_user.voted_for,
-                                'grey-text': !vproject.current_user.voted_for }">
+                                'grey-text': !vproject.current_user.voted_for }"
+              v-bind:id="'vote-for-' + vproject.id ">
           <span>
             <i class="material-icons">thumb_up</i>
             <span class="vote-in-buttons">
               {{ vproject.votes_for}}
             </span>
           </span>
-      </button>
-      <button v-if="!editMode"
+      </a>
+      <a v-if="!editMode"
               v-on:click = "vote(false)"
               class="waves-effect btn btn-flat"
               v-bind:class="{ 'red-text textdarken-3': vproject.current_user.voted_against,
-                                'grey-text': !vproject.current_user.voted_against}">
+                                'grey-text': !vproject.current_user.voted_against}"
+              v-bind:id="'vote-against-' + vproject.id ">
           <span>
             <i class="material-icons">thumb_down</i>
             <span class="vote-in-buttons">
               {{ vproject.votes_against}}
             </span>
           </span>
-      </button>
+      </a>
       <a v-if="!editMode"
               v-bind:href="project.urls.show"
               class="waves-effect btn btn-flat"
@@ -132,7 +134,8 @@
       </a>
       <button v-if="!editMode"
               v-on:click = "vproject.current_user.is_member ? join(false) : join(true)"
-              class="waves-effect btn btn-flat">
+              class="waves-effect btn btn-flat"
+              v-bind:id="'join-' + vproject.id ">
           <span>
             <span v-if="vproject.current_user.is_member">
               Je ne veux plus aider
