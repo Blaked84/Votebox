@@ -55,6 +55,10 @@ group :test do
   gem 'faker'
   gem 'shoulda-matchers', '~> 3.0'
   gem 'database_cleaner'
+  gem 'cucumber-rails', :require => false
+  gem 'poltergeist'
+
+
 end
 
 group :development do

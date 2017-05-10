@@ -7,6 +7,7 @@
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "gorg_engine/application"
     = javascript_include_tag "application"
+    = javascript_include_tag "components/project"
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}/
 
 
@@ -22,7 +23,7 @@
             Soutiens les
             %b
               %span#yourelement
-            qui te tiennent à coeur
+            qui te tiennent à cœur
           =link_to "#projects", class: "waves-effect waves-teal btn white btn-landing-primary" do
             Découvrir
           =link_to new_project_path, class: "waves-effect waves-white btn btn-flat white-text btn-landing-secondary" do
