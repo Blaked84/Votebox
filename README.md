@@ -1,12 +1,13 @@
-== README
+# README
 
-=== Initial Configuration
+[![Build Status](https://travis-ci.org/Blaked84/Votebox.svg?branch=master)](https://travis-ci.org/Blaked84/Votebox)
+## Initial Configuration
 
 Before first use, you need to configure /config/secrets.yml
 
 An example file is available in /config/secretes.yml.template
 
-=== Database creation
+### Database creation
 
 Database configuration is in config/database.yml
 
@@ -20,32 +21,3 @@ Then, use :
  RAILS_ENV=development bundle exec rake db:setup
  RAILS_ENV=test bundle exec rake db:setup
  RAILS_ENV=production bundle exec rake db:setup
-
-=== Database initialization
-
-Default database is empty
-
-You will need an admin account to configure the application. There is 2 ways to create an admin account :
-
-* In development environnement : create default accounts
-
-Run :
- rake db:populate
-
-It will :
-- Flush current database and recreate it from the schema
-- Seed the database with default values (Roles for example)
-- Create default users :
-  - an admin: admin@poubs.org
-  - a helpdesk user : support@poubs.org
-  - 3 basic users : user1@poubs.org, user2@poubs.org, user3@poubs.org
-
-All password are : *password*
-
-* In production environnement : create an account manually or connect from omniauth then set admin Role to the created account
-
-==== Default accounts
-
-
-
-==== Manual Admin granting
