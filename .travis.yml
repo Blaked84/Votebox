@@ -1,19 +1,32 @@
+dist: trusty
+
 language: ruby
 
 cache:
   bundler: true
   directories:
     - tmp/cache
+    - $PWD/travis-phantomjs2
+    - $PWD/travis-phantomjs21
+
 rvm:
   - 2.4.0
-before_install: gem install bundler -v 1.14.5
+before_install:
+    - gem install bundler -v 1.14.5
+    - mkdir -p travis-phantomjs2 travis-phantomjs21
+    - if [ ! -f $PWD/travis-phantomjs2/phantomjs ]; then wget https://github.com/Pyppe/phantomjs2.0-ubuntu14.04x64/raw/master/bin/phantomjs -O $PWD/travis-phantomjs2/phantomjs; fi
+    - if [ ! -f $PWD/travis-phantomjs21/phantomjs ]; then wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -O $PWD/phantomjs-2.1-linux-x86_64.tar.bz2; tar -xvf $PWD/phantomjs-2.1-linux-x86_64.tar.bz2 -C $PWD/travis-phantomjs21 --strip-components 2 phantomjs-2.1.1-linux-x86_64/bin/phantomjs; fi
+    - chmod +x $PWD/travis-phantomjs2/phantomjs $PWD/travis-phantomjs21/phantomjs
+
 install: bundle install --jobs=3 --retry=3 --deployment --without development
+
 services:
   - postgresql
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - cp config/database.travis.yml config/database.yml
   - cp config/secrets.travis.yml config/secrets.yml
+  - ${PHANTOMJS:-phantomjs} --version
 script:  
   - RAILS_ENV=test bundle exec rake db:migrate
   - RAILS_ENV=test bundle exec rspec spec/
