@@ -60,5 +60,6 @@ Feature: Landing Page for logged user
     #todo add wait for ajax
     And  I go to the homepage
     When I click on join for first project
+    And  I go to the homepage
     Then I am not member of the first project
     
