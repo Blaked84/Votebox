@@ -77,11 +77,11 @@
       <p class="grey-text project-subtitle">
           <span v-if="vproject.votes_for">
             <i class="material-icons">thumb_up</i>
-            {{ vproject.voters_for.join(', ') }}
+            {{ vproject.voters_for }}
           </span>
         <span v-if="vproject.votes_against">
             <i class="material-icons">thumb_down</i>
-            {{ vproject.voters_against.join(', ') }}
+            {{ vproject.voters_against }}
           </span>
         <a v-if="vproject.comments_count"
            v-bind:href="project.urls.show"

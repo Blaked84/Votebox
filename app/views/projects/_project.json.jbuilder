@@ -11,8 +11,8 @@ json.extract! project,
               :comments_count
 json.members_infos project.users.map(&:infos_to_display)
 json.description sanitize( project.description)
-json.voters_for project.voters(true)
-json.voters_against project.voters(false)
+json.voters_for project.decorate.voters_for
+json.voters_against project.decorate.voters_against
 json.current_user do
   user = current_user || User.new
   json.logged_user current_user.present?
