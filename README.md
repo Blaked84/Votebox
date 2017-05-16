@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/Blaked84/Votebox.svg?branch=master)](https://travis-ci.org/Blaked84/Votebox)
 [![Code Climate](https://codeclimate.com/github/Blaked84/Votebox.png)](https://codeclimate.com/github/Blaked84/Votebox)
 [![Test Coverage](https://codeclimate.com/github/Blaked84/Votebox/badges/coverage.svg)](https://codeclimate.com/github/Blaked84/Votebox/coverage)
+[![Dependency Status](https://gemnasium.com/badges/github.com/Blaked84/Votebox.svg)](https://gemnasium.com/github.com/Blaked84/Votebox)
 ## Initial Configuration
 
 Before first use, you need to configure /config/secrets.yml
