@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
     else
       @comments = Comment.all
     end
-    authorize! :show, @comments
+    authorize! :show, :comments
   end
 
   # GET /comments/1

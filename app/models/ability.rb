@@ -51,7 +51,9 @@ class Ability
     elsif  user.persisted?
       can [:vote, :show, :join, :create], Project
       can :edit, Project, :author => user
-      can [:create, :show], Comment
+      can :show, Comment
+      can :show, :comments
+      can [:create], Comment
       can :edit, Comment, :author => user
     end
 
