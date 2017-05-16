@@ -23,9 +23,7 @@ class ProjectDecorator < Draper::Decorator
   private
   def format_voters(voters_array)
     if voters_array.count > 3
-      "#{voters_array[0..1].join(', ')} et une autre personne"
-    elsif voters_array.count > 4
-                "#{voters_array[0..1].join(', ')} et #{voters_array.count-3 } autres personnes"
+      "#{voters_array[0..1].join(', ')} et #{voters_array.count-2 } autres personnes"
     elsif voters_array.count == 1
       voters_array.first
     else

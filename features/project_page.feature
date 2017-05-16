@@ -23,4 +23,4 @@ Feature: Project Page for logged in user
     And User Luke Skywalker vote for project called Project-one
     And User Anakin Skywalker vote for project called Project-one
     And I go to the Project-one project page
-    Then I should see voters as John Doe, Janette Doe et une autre personne
+    Then I should see voters as John Doe, Janette Doe et 2 autres personnes
