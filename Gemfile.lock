@@ -1,18 +1,18 @@
 GIT
-  remote: git://github.com/Blaked84/configurable_engine.git
+  remote: https://github.com/Blaked84/configurable_engine.git
   revision: b46977d916cc4627480ec8d9abd5d2e895823aad
   specs:
     configurable_engine (0.4.9.1)
       rails (> 3.1.0)
 
 GIT
-  remote: git://github.com/alexpeattie/heroku_secrets.git
+  remote: https://github.com/alexpeattie/heroku_secrets.git
   revision: 717af8e0acf399bc88d2c8c1a7e230023942af0f
   specs:
     heroku_secrets (0.0.2)
 
 GIT
-  remote: git://github.com/gadzorg/GorgEngine.git
+  remote: https://github.com/gadzorg/GorgEngine.git
   revision: 353bc2c4e29bc641feab83c3bf54c37c1cc1dd87
   specs:
     gorg_engine (1.2.2)
@@ -36,13 +36,6 @@ GIT
       will_paginate (~> 3.0.0)
 
 GIT
-  remote: git://github.com/patricklindsay/simple_form-materialize.git
-  revision: 6d2afdec6f0523946fb2221070f05b79739be12a
-  specs:
-    simple_form-materialize (0.0.1)
-      rails (~> 4.2)
-
-GIT
   remote: https://github.com/loocla/omniauth-cas.git
   revision: 16395f85579dc915c0e22f80b4f5d98a019e37ec
   branch: saml
@@ -51,6 +44,13 @@ GIT
       addressable (~> 2.3)
       nokogiri (~> 1.5)
       omniauth (~> 1.1.0)
+
+GIT
+  remote: https://github.com/patricklindsay/simple_form-materialize.git
+  revision: 6d2afdec6f0523946fb2221070f05b79739be12a
+  specs:
+    simple_form-materialize (0.0.1)
+      rails (~> 4.2)
 
 GEM
   remote: https://rubygems.org/
