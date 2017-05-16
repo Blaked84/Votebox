@@ -2,6 +2,11 @@ Given(/^There is a project called (.*) decribed by (.*)/) do |name, description|
   FactoryGirl.create(:project, name: name, description: description)
 end
 
+When(/^I go to the (.*) project page$/) do |name|
+  project = Project.find_by(name: name)
+  visit project_path(project)
+end
+
 Then(/^I should see a project named (.*)/) do |name|
   expect(page).to have_content(name)
 end
