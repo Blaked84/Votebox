@@ -2,6 +2,10 @@ dist: trusty
 
 language: ruby
 
+addons:
+  code_climate:
+    repo_token: 8a3559b67e8efa5283885d80cfbca3a10a1d76b81e9d897609bbfae235b1dfeb
+
 cache:
   bundler: true
   directories:
@@ -31,3 +35,5 @@ script:
   - RAILS_ENV=test bundle exec rake db:migrate
   - RAILS_ENV=test bundle exec rspec spec/
   - RAILS_ENV=test bundle exec cucumber
+after_success:
+  - bundle exec codeclimate-test-reporter

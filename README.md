@@ -1,6 +1,8 @@
 # README
 
 [![Build Status](https://travis-ci.org/Blaked84/Votebox.svg?branch=master)](https://travis-ci.org/Blaked84/Votebox)
+[![Code Climate](https://codeclimate.com/github/Blaked84/Votebox.png)](https://codeclimate.com/github/Blaked84/Votebox)
+[![Test Coverage](https://codeclimate.com/github/Blaked84/Votebox/badges/coverage.svg)](https://codeclimate.com/github/Blaked84/Votebox/coverage)
 ## Initial Configuration
 
 Before first use, you need to configure /config/secrets.yml

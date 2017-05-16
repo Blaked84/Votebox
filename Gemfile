@@ -61,7 +61,9 @@ group :test do
   gem 'database_cleaner'
   gem 'cucumber-rails', :require => false
   gem 'poltergeist'
-
+  #code coverage
+  gem "simplecov"
+  gem "codeclimate-test-reporter", "~> 1.0.0"
 
 end
 
