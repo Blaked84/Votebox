@@ -2,6 +2,15 @@ Given(/^There is a project called (.*) decribed by (.*)/) do |name, description|
   FactoryGirl.create(:project, name: name, description: description)
 end
 
+Given(/^User called (.*) created a project called (.*) and decribed by (.*)/) do |firstname_lastname_separated_by_space, project_name, project_description|
+  firstname, lastname = firstname_lastname_separated_by_space.split
+  user = User.find_by(firstname: firstname, lastname: lastname)
+  FactoryGirl.create(:project,
+                     name: project_name,
+                     description: project_description,
+                     user_id: user.id)
+end
+
 When(/^I go to the (.*) project page$/) do |name|
   project = Project.find_by(name: name)
   visit project_path(project)
@@ -53,4 +62,8 @@ Then(/^I (.*) member of the first project$/) do |verb|
     else
       raise "You should use 'had' or 'had not'"
   end
+end
+
+Then(/^I should see project author name (.*)/) do |name|
+  expect(page).to have_content(name)
 end
