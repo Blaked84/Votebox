@@ -1,8 +1,8 @@
-Given(/^There is a project called (.*) decribed by (.*)/) do |name, description|
+Given(/^There is a project called (.*) described by (.*)/) do |name, description|
   FactoryGirl.create(:project, name: name, description: description)
 end
 
-Given(/^User called (.*) created a project called (.*) and decribed by (.*)/) do |firstname_lastname_separated_by_space, project_name, project_description|
+Given(/^User called (.*) created a project called (.*) and described by (.*)/) do |firstname_lastname_separated_by_space, project_name, project_description|
   firstname, lastname = firstname_lastname_separated_by_space.split
   user = User.find_by(firstname: firstname, lastname: lastname)
   FactoryGirl.create(:project,
@@ -64,6 +64,9 @@ Then(/^I (.*) member of the first project$/) do |verb|
   end
 end
 
-Then(/^I should see project author name (.*)/) do |name|
+Then(/^I should see project (.*) author name (.*)/) do |project_name, author_name|
+  project = Project.find_by(name: project_name)
+
   expect(page).to have_content(name)
+  expect(project.author_name).to eq(author_name)
 end

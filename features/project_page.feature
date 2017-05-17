@@ -2,7 +2,7 @@ Feature: Project Page for logged in user
   A user should see the project, voters and comments
 
   Background:
-    Given There is a project called Project-one decribed by P1-description
+    Given There is a project called Project-one described by P1-description
     And I'm a registred user
     And I'm logged in
     And There is an user called John Doe with uuid : 84848484-8484-8484-8484-848484848484

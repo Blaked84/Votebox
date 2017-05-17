@@ -1,7 +1,7 @@
 Feature: Landing Page for logged user
 
   Background:
-    Given There is a project called Project-one decribed by P1-description
+    Given There is a project called Project-one described by P1-description
     And I'm a registred user
     And I'm logged in
     And I go to the homepage
