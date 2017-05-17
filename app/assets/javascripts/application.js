@@ -33,7 +33,6 @@ $( document ).ready(function() {
             })
         }
     });
-    console.log("ekjbvdsjkfb")
 });
 
 // Vue.http.interceptors.push({
