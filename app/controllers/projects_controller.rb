@@ -73,13 +73,9 @@ class ProjectsController < ApplicationController
     authorize! :vote, @project
     case params[:direction]
       when 'up'
-        current_user.voted_for?(@project) ?
-            current_user.unvote_for(@project) :
-            current_user.vote(@project, { :exclusive => true, :direction => :up })
+        current_user.vote_or_cancel_vote(:up, @project, "voted_for?")
       when 'down'
-        current_user.voted_against?(@project) ?
-            current_user.unvote_for(@project) :
-            current_user.vote(@project, { :exclusive => true, :direction => :down })
+        current_user.vote_or_cancel_vote(:down, @project,"voted_against?")
       else
         current_user.unvote_for(@project)
     end

@@ -12,8 +12,12 @@ class User < ActiveRecord::Base
 
   def infos_to_display
     {name: self.fullname, avatar_url:  self.avatar_url}
-    # profile_url: "https://www.arts-et-metiers.asso.fr/index.php/annuaire2/profil/id/" + m.avatar_url.split("/").last.split("_").last.split(".").first
+  end
 
+  def vote_or_cancel_vote(direction, votable_ressource, cancel_method)
+    self.send(cancel_method, votable_ressource) ?
+        self.unvote_for(votable_ressource) :
+        self.vote(votable_ressource, { :exclusive => true, :direction => direction })
   end
 
 end
