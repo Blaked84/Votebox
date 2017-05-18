@@ -123,8 +123,7 @@
       <a v-if="!editMode"
               v-bind:href="project.urls.show"
               class="waves-effect btn btn-flat"
-              v-bind:class="{ 'red-text textdarken-3': vproject.current_user.voted_against,
-                                'grey-text': !vproject.current_user.voted_against}">
+              >
           <span>
             <i class="material-icons">comment</i>
             <span class="vote-in-buttons black-text">
