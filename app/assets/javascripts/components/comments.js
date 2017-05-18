@@ -3,7 +3,7 @@ $( document ).ready(function() {
     Vue.component('comment-row', {
        template: '#comment-row',
        props: {
-           comment: Object,
+           comment: Object
        },
        data: function () {
             return {

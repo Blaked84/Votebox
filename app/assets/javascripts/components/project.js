@@ -17,26 +17,22 @@ $( document ).ready(function() {
            vote: function (_for) {
                var that = this;
                if (that.project.current_user.logged_user)
-                   $.ajax({
-                       method: 'POST',
-                       url: _for ? that.project.urls.vote_for : that.project.urls.vote_against,
-                       success: function(res) {
-                           that.vproject = res;
-                       }
-                   });
+                    Vue.http.post(_for ? that.project.urls.vote_for : that.project.urls.vote_against).then(
+                       function (response) {
+                           that.vproject = response.body;},
+                       console.log("error")
+                    );
                else
                    location.href = "users/sign_in";
            },
            join: function (join) {
                var that = this;
                if (that.project.current_user.logged_user)
-                   $.ajax({
-                       method: 'POST',
-                       url: join ? that.project.urls.join : that.project.urls.leave,
-                       success: function(res) {
-                           that.vproject = res;
-                       }
-                   });
+                   Vue.http.post(join ? that.project.urls.join : that.project.urls.leave).then(
+                       function (response) {
+                           that.vproject = response.body;},
+                       console.log("error")
+                   );
                else
                    location.href = "users/sign_in";
            },
@@ -46,9 +42,14 @@ $( document ).ready(function() {
            },
            update_project: function () {
                var that = this;
-               Vue.http.patch(that.vproject.url,{name: that.vproject.name, description: that.vproject.description, category_id: that.vproject.category.id}).then( function (response) {
-                   that.vproject = response.body;
-                   that.editMode = false},
+               Vue.http.patch(that.vproject.url,{
+                   name: that.vproject.name,
+                   description: that.vproject.description,
+                   category_id: that.vproject.category.id
+               }).then(
+                   function (response) {
+                       that.vproject = response.body;
+                       that.editMode = false},
                    console.log("error")
                )
            }
@@ -70,17 +71,18 @@ $( document ).ready(function() {
         mounted: function() {
             var that;
             that = this;
-            $.ajax({
-                url: this.ProjectsUrl,
-                success: function(res) {
-                    that.projects = res.constructor === Array ? res : [res];
-                }
+
+            this.$http.get(this.ProjectsUrl).then(
+                function(response){
+                    that.projects = response.body.constructor === Array ?
+                        response.body :
+                        [response.body];
             });
-            $.ajax({
-                url: "/categories.json",
-                success: function(res) {
-                    that.categories = res.constructor === Array ? res : [res];
-                }
+            this.$http.get("/categories.json").then(
+                function(response){
+                    that.categories = response.body.constructor === Array ?
+                        response.body :
+                        [response.body];
             });
         },
         computed: {
@@ -102,8 +104,6 @@ $( document ).ready(function() {
                 this.$http.get(this.ProjectsUrl).then(
                     function(response){
                         that.projects = response.body
-
-
                 });
             }
         }
